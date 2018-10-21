@@ -95,4 +95,4 @@ Please check the [LICENSE](LICENSE) file for legal information.
 Please get [in touch](http://www.jacktex.eu/about/contact.php) if you would like to contribute to this project.
 
 ### Version
-v0.0
+v1.0
