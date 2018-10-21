@@ -1,4 +1,4 @@
-module PrettyTime.Local
+module JTPrettyTime.Local
 ( getCurTimeString
 , getCurDay
 , getTime

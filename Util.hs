@@ -1,4 +1,4 @@
-module PrettyTime.Util
+module JTPrettyTime.Util
 ( diffYears
 , isAnniversary
 , Iso8601
