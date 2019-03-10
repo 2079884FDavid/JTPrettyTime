@@ -1,0 +1,64 @@
+<?xml version='1.0' ?>
+<testsuite errors="0" failures="14" skipped="" hostname="davidf-ThinkPad-X260" name="test-framework tests" tests="19" time="0.0" timestamp="Sun March 10 18:51:06 CET 2019" id="" package="">
+  <testcase name="Parse extended +00:00" classname="JTPrettyTime.Iso8601 parse" time="">
+    <failure message="" type="">expected: 1552228609
+ but got: 0</failure>
+  </testcase>
+  <testcase name="Parse extended Military Time Zone (UTC)" classname="JTPrettyTime.Iso8601 parse" time="">
+    <failure message="" type="">expected: 1552228609
+ but got: 0</failure>
+  </testcase>
+  <testcase name="Parse basic format" classname="JTPrettyTime.Iso8601 parse" time="">
+    <failure message="" type="">expected: 1552228609
+ but got: 0</failure>
+  </testcase>
+  <testcase name="Parse extended -02:00" classname="JTPrettyTime.Iso8601 parse" time="">
+    <failure message="" type="">expected: 1552228609
+ but got: 0</failure>
+  </testcase>
+  <testcase name="Parse with no T delimiter" classname="JTPrettyTime.Iso8601 parse" time="">
+    <failure message="" type="">expected: 1552228609
+ but got: 0</failure>
+  </testcase>
+  <testcase name="Parse with no timezone specifier" classname="JTPrettyTime.Iso8601 parse" time="">
+    <failure message="" type="">expected: 1552228609
+ but got: 0</failure>
+  </testcase>
+  <testcase name="Parse floating seconds" classname="JTPrettyTime.Iso8601 parse" time="">
+    <failure message="" type="">expected: 1552228609
+ but got: 0</failure>
+  </testcase>
+  <testcase name="Parse Military Time Zone (O = -02:00)" classname="JTPrettyTime.Iso8601 parse" time="">
+    <failure message="" type="">expected: 1552228609
+ but got: 0</failure>
+  </testcase>
+  <testcase name="Parse +00:30 minutes" classname="JTPrettyTime.Iso8601 parse" time="">
+    <failure message="" type="">expected: 1552228609
+ but got: 0</failure>
+  </testcase>
+  <testcase name="Parse with no minutes and seconds" classname="JTPrettyTime.Iso8601 parse" time="">
+    <failure message="" type="">expected: 1552226400
+ but got: 0</failure>
+  </testcase>
+  <testcase name="Parse date only" classname="JTPrettyTime.Iso8601 parse" time="">
+    <failure message="" type="">expected: 1552176000
+ but got: 0</failure>
+  </testcase>
+  <testcase name="ParseTimezone +00:00" classname="JTPrettyTime.Iso8601 parseTimezone" time="" />
+  <testcase name="ParseTimezone +01:00" classname="JTPrettyTime.Iso8601 parseTimezone" time="">
+    <failure message="" type="">expected: 3600
+ but got: 0</failure>
+  </testcase>
+  <testcase name="ParseTimezone Z" classname="JTPrettyTime.Iso8601 parseTimezone" time="" />
+  <testcase name="ParseTimezone F" classname="JTPrettyTime.Iso8601 parseTimezone" time="" />
+  <testcase name="ParseTimezone +00:30" classname="JTPrettyTime.Iso8601 parseTimezone" time="">
+    <failure message="" type="">expected: 1800
+ but got: 0</failure>
+  </testcase>
+  <testcase name="ParseTimezone -02:00" classname="JTPrettyTime.Iso8601 parseTimezone" time="">
+    <failure message="" type="">expected: -7200
+ but got: 0</failure>
+  </testcase>
+  <testcase name="ParseTimezone garbage" classname="JTPrettyTime.Iso8601 parseTimezone" time="" />
+  <testcase name="ParseTimezone none" classname="JTPrettyTime.Iso8601 parseTimezone" time="" />
+</testsuite>
