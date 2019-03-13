@@ -1,0 +1,7 @@
+# Ignore everything
+*
+
+# But a few...
+!.gitignore
+!*.hs
+!run_tests.sh

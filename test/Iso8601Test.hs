@@ -50,6 +50,10 @@ groupIso8601ParseTimezone =
           (test_parseTimezone_specific "F" 21600),
       testCase "ParseTimezone +00:30" 
           (test_parseTimezone_specific "+00:30" 1800),
+      testCase "ParseTimezone +0030" 
+          (test_parseTimezone_specific "+0030" 1800),
+      testCase "ParseTimezone +02" 
+          (test_parseTimezone_specific "+02" 7200),
       testCase "ParseTimezone -02:00" 
           (test_parseTimezone_specific "-02:00" (-7200)),
       testCase "ParseTimezone garbage" 
