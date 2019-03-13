@@ -1,6 +1,7 @@
 import Test.Framework as Framework (defaultMain, Test)
 
-import Iso8601Test
+import Iso8601.ParseTest
+import Iso8601.Timezone.ParseTest
 
 main :: IO ()
 main = defaultMain tests
@@ -8,5 +9,5 @@ main = defaultMain tests
 tests :: [Framework.Test]
 tests = [
   groupIso8601Parse,
-  groupIso8601ParseTimezone]
+  groupIso8601TimezoneParse]
 

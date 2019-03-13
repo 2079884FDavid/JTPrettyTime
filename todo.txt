@@ -1,3 +1,1 @@
-Finish parseTimezone: add to the list of maybes for +00:00 and -00:00
-
-Break up Iso8601: The file is becoming too big and too cluttered. This should be split into a sensible directory tree.
+Think about UnixTimestamp again. In particular anniversaries and leap years. Find the documentation of date -> unix timestamp
