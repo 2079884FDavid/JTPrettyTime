@@ -1,1 +1,3 @@
+Rewrite all parsing (starting with the timezone) in Parsec. This is not only a good exercise, but should also reduce the code significantly and make it all much more readable. See also: http://book.realworldhaskell.org/read/using-parsec.html
+
 Think about UnixTimestamp again. In particular anniversaries and leap years. Find the documentation of date -> unix timestamp

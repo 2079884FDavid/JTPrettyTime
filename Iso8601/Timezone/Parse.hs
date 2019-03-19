@@ -62,16 +62,17 @@ matchOrDefault xs d = f (catMaybes xs)
     f (x:_) = x
     f [] = d
 
+--The minute offset can return a default because the ISO
+--standard requires only an hour. +02:FOOBAR is valid
 readOffsetMinutes :: String -> Integer
 readOffsetMinutes s = matchOrDefault [m, cm] 0
   where
     m = readTwoDigits s
     cm = ifMatchRun s ':' readTwoDigits
 
-parse :: String -> Integer
-parse s = matchOrDefault matches def
+parse :: String -> Maybe Integer
+parse s = listToMaybe $ catMaybes matches
   where
-    def = 0
     designator = lookupDesignator s
     positive = ifMatchRun s '+' readOffset
     negative = ifMatchRun s '-' negateOffset
