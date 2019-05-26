@@ -8,6 +8,7 @@ The following instructions will show you how to incorporate this library into yo
 ### Prerequisites/Dependencies
 
     cabal install time
+    cabal install unix-time
 
 ### Add the library to your project
 You have an existing project:
