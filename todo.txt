@@ -1,7 +1,3 @@
-Check the unit tests some of them are failing but shouldn't. 
-
-Add tests to the unit tests which ensure that the parser returns `right` values.
-
 Add more unit tests.
 
 Add tests for invalid input.
