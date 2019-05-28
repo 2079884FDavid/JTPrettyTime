@@ -45,7 +45,7 @@ parseReducedDate = do
   return $ tripleToTimestamp (y, m, 1)
   where
     -- The month is optional
-    m' = (char '-' >> parseDigits 2) <|> return 0
+    m' = (char '-' >> parseDigits 2) <|> return 1
 
 tripleToTimestamp :: (Int, Int, Int) -> Int
 tripleToTimestamp (y,m,d) = 
