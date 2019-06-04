@@ -5,3 +5,4 @@
 !.gitignore
 !*.hs
 !run_tests.sh
+!Parsec/

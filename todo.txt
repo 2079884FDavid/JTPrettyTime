@@ -1,5 +1,3 @@
-Add tests for invalid input.
-
 Add tests to check the individual parsers too.
 
 Remove Iso8601/ and Iso8601.hs
