@@ -1,5 +1,6 @@
 module JTPrettyTime.Parsec.ParseIso8601
 ( parseIso8601
+, iso8601Parser
 ) where
 
 import JTPrettyTime.Parsec.ParseDate
@@ -9,10 +10,13 @@ import Text.Parsec
 import Text.Parsec.String
 
 parseIso8601 :: String -> Either ParseError Int
-parseIso8601 input = parse pChoice st input
+parseIso8601 input = parse iso8601Parser failMsg input
   where
-    st = "Failed to parse ISO8601 from string \""++input++"\""
-    pChoice = try pFull <|> parseReducedDate
+    failMsg = "Failed to parse ISO8601 from string \""++input++"\""
+
+iso8601Parser :: Parser Int
+iso8601Parser = try pFull <|> parseReducedDate
+  where
     pFull = chainedParse [
       parseDateTriple,
       parseCombinedDelimiter,
