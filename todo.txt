@@ -1,5 +1,5 @@
 Add tests to check the individual parsers too.
 
-Remove Iso8601/ and Iso8601.hs
-
 Think about UnixTimestamp again. In particular anniversaries and leap years. Find the documentation of date -> unix timestamp
+
+Update the other Utils and stuff.
