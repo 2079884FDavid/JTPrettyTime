@@ -1,4 +1,4 @@
-Add more tests to check the individual parsers (already done for the date parsers).
+Remove main.hs from Parsec and make a test/example.hs instead (including a comment how to compile and run).
 
 Think about UnixTimestamp again. In particular anniversaries and leap years. Find the documentation of date -> unix timestamp
 
