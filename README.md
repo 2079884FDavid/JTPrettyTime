@@ -79,14 +79,10 @@ Checks if the two dates are following on the same month and day of the month.
     *JTPrettyTime.Util> isAnniversary d1 d2
     True
 
-**`Iso8601`** `= String`<br/>
-String in the ISO8601 format (`"1990-10-03"`).
+### `JTPrettyTime.Parsec.ParseIso8601`
+**`parseIso8601`** `:: String -> Either String Int`<br/>
 
-**`parseIso8601`** `:: ParseTime t => Iso8601 -> t`<br/>
-Parses an Iso8601 string into any parsable time format (such as `Day`).
-
-    *JTPrettyTime.Util> parseIso8601 "1969-07-16" :: Day
-    1969-07-16
+**`parseIso8601Strict`** `:: String -> Either String Int`<br/>
 
 # Misc
 Developer workflow and release management [as described](https://nvie.com/posts/a-successful-git-branching-model/) by Vincent Driessen.

@@ -1,3 +1,6 @@
-Think about UnixTimestamp again. In particular anniversaries and leap years. Find the documentation of date -> unix timestamp
+Update the README.txt
+
+Think about UnixTimestamp again. In particular anniversaries and leap years.
+Find the documentation of date -> unix timestamp
 
 Update the other Utils and stuff.
