@@ -1,9 +1,12 @@
-import ParseIso8601
+import JTPrettyTime.Parsec.ParseIso8601
+
+-- Compile like this
+-- ghc example1.hs -Wall -Werror --make -i.:../.. -outputdir obj/ -o example1
 
 -- Test with
--- date -d @$(./main < input.txt)
+-- date -d @$(./example1 < example1_input.txt)
 
--- Reverse
+-- Get a unix timestamp from bash
 -- date -d "2019-03-10T12:36:49-02:00" +%s
 
 play :: String -> IO ()

@@ -1,5 +1,3 @@
-Remove main.hs from Parsec and make a test/example.hs instead (including a comment how to compile and run).
-
 Think about UnixTimestamp again. In particular anniversaries and leap years. Find the documentation of date -> unix timestamp
 
 Update the other Utils and stuff.

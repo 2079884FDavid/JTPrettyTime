@@ -2,7 +2,8 @@
 *
 
 # But a few...
-!.gitignore
 !*.hs
-!run_tests.sh
+!*.txt
+!.gitignore
 !Parsec/
+!run_tests.sh
