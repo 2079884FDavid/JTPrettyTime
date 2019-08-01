@@ -13,7 +13,11 @@ import qualified Data.ByteString.Char8 as C
 -- year ::= digit digit digit digit
 -- month ::= digit digit
 -- day ::= digit digit
--- date ::= year | year - month | year month | year - month - day | year month day
+-- date ::= year
+--        | year - month 
+--        | year month 
+--        | year - month - day 
+--        | year month day
 
 -- YYYY-MM-DD or YYYYMMDD
 parseDateTriple :: Parser Int

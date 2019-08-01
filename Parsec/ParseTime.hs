@@ -8,7 +8,7 @@ import Text.Parsec
 import Text.Parsec.String
 
 parseCombinedDelimiter :: Parser Int
-parseCombinedDelimiter = char 'T' >> return 0
+parseCombinedDelimiter = (char 'T' <|> char ' ') >> return 0
 
 parseTime :: Parser Int
 parseTime = do

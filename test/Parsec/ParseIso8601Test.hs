@@ -21,6 +21,9 @@ groupIso8601Parse =
         "Parse extended +00:00"
         ("2019-03-10T14:36:49+00:00", 1552228609),
       testParseIso8601Success
+        "Parse extended +00:00"
+        ("2019-03-10 14:36:49+00:00", 1552228609),
+      testParseIso8601Success
         "Parse extended Military Time Zone (UTC)"
         ("2019-03-10T14:36:49Z", 1552228609),
       testParseIso8601Success

@@ -9,11 +9,14 @@ import Test.HUnit
 import Text.Parsec
 import Text.Parsec.String
 
-testParserSuccess :: Parser Int -> String -> (String, Int) -> Framework.Test
+testParserSuccess :: Parser Int 
+                  -> String 
+                  -> (String, Int) 
+                  -> Framework.Test
 testParserSuccess pTested desc (input, expect) = testCase desc t
   where
     t = case parse pTested "Failure" input of 
-          Left v -> assertFailure $ "Cannot be parsed: "++(show v)
+          Left v -> assertFailure $ "Cannot be parsed: "++ show v
           Right v -> v @?= expect
 
 testParserFailure :: Parser Int -> String -> String -> Framework.Test

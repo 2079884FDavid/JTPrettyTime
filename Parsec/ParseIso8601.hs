@@ -11,8 +11,8 @@ import Text.Parsec
 import Text.Parsec.String
 
 -- Use this to read the string as far as possible, best effort style.
--- WARNING: This means that a malformed input might be partially read and
--- partially ignored.
+-- WARNING: This means that a malformed input might be partially read
+-- and partially ignored.
 parseIso8601 :: String -> Either String Int
 parseIso8601 = sandboxParse iso8601Parser
 

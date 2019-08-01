@@ -1,4 +1,4 @@
-Update the README.txt
+Update the README.txt how-to use the test/example.
 
 Think about UnixTimestamp again. In particular anniversaries and leap years.
 Find the documentation of date -> unix timestamp
