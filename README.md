@@ -1,4 +1,5 @@
 # JTPrettyTime
+
 A small Haskell library for simplified date and time handling.
 
 ## Getting started
@@ -13,6 +14,7 @@ of submodules check out this [link](https://gist.github.com/gitaarik/8735255).
     cabal install unix-time
 
 ### Add the library to your project
+
 You have an existing project:
 
     myproject$ tree -aL 1
@@ -41,6 +43,7 @@ JTPrettyTime.[module]`
     git commit -m "Updated to latest JTPrettyTime release"
 
 ### Checkout your repository
+
 If your repository contains this library as a submodule run the following:
 
     git checkout https://myproject
@@ -49,28 +52,36 @@ If your repository contains this library as a submodule run the following:
 
 # Usage Examples
 
+For an implementation example see `test/example[0-9]*.hs`.
+
 ### `JTPrettyTime.Local`
-**`getCurDay`** `:: IO Day`<br/>
+
+**`getCurDay`** `:: IO Day`
+
 Gets the current day taking the local timezone of the machine into account.
 
     *JTPrettyTime.Local> getCurDay
     2018-10-21
 
-**`getCurTimeString`** `:: IO String`<br/>
+**`getCurTimeString`** `:: IO String`
+
 Gets the local date, time and timezone and returns it in a human readible
 format.
 
     *JTPrettyTime.Local> getCurTimeString
     "2018-10-21 18:58:45 [CEST]"
 
-**`getTime`** `:: IO LocalTime`<br/>
+**`getTime`** `:: IO LocalTime`
+
 Gets the local time of the machine.
 
     *JTPrettyTime.Local> getTime
     2018-10-21 18:59:11.721698145
 
 ### `JTPrettyTime.Util`
-**`diffYears`** `:: Day -> Day -> Integer`<br/>
+
+**`diffYears`** `:: Day -> Day -> Integer`
+
 Different in years between two dates. This only looks at the year not at the
 day or month. That means if one day is in December and the second day is a day
 in January of the following year `diffYears` will return 1.
@@ -80,7 +91,8 @@ in January of the following year `diffYears` will return 1.
     *JTPrettyTime.Util> diffYears d1 d2
     1
 
-**`isAnniversary`** `:: Day -> Day -> Bool`<br/>
+**`isAnniversary`** `:: Day -> Day -> Bool`
+
 Checks if the two dates are following on the same month and day of the month.
 
     *JTPrettyTime.Util> let d1 = parseIso8601 "2001-09-11" :: Day
@@ -89,7 +101,9 @@ Checks if the two dates are following on the same month and day of the month.
     True
 
 ### `JTPrettyTime.Parsec.ParseIso8601`
-**`parseIso8601`** `:: String -> Either String Int`<br/>
+
+**`parseIso8601`** `:: String -> Either String Int`
+
 Parses a string which contains a date and time in the ISO8601 format. The 'T'
 delimiter between date and time is optional. '1970-01-01T00:00+00:00' is the
 assumed default. For instance, if the string is equivalent to "2019-09", the
@@ -99,15 +113,16 @@ however, that this can lead to surprising results. In the example below the
 timezone 'CET' is silently ignored (because according to the ISO8601 standard,
 timezones have to be written as absolute values with the exception of 'Z'). If
 you want to ensure that the entire string is parsed, use parseIso8601Strict
-instead. Returns (Right Unix-Timestamp) or (Left Error-Message) if there was a
-parsing error. 
+instead. Returns (Right Unix-Timestamp) or, if there was a parsing error, (Left
+Error-Message).
 
     *JTPrettyTime.Parsec.ParseIso8601> parseIso8601 "2019-08-01 18:30-06:00"
     Right 1564705800
     *JTPrettyTime.Parsec.ParseIso8601> parseIso8601 "2019-08-01 18:30 CET"
     Right 1564684200
 
-**`parseIso8601Strict`** `:: String -> Either String Int`<br/>
+**`parseIso8601Strict`** `:: String -> Either String Int`
+
 Equivalent to parseIso8601 but the entire string needs to be parsable.
 
     parseIso8601Strict "2019-08-01 18:30-06:00"
@@ -116,10 +131,12 @@ Equivalent to parseIso8601 but the entire string needs to be parsable.
     Left "\"Failed to parse ISO8601 from string \"2019-08-01 18:30 CET\"\" (line 1, column 17):\nunexpected ' '\nexpecting \":\", \"Z\", \"+\", \"-\" or end of input"
 
 # Testing
+
 All tests for this library are saved in `test/[module]Test.hs` and are combined
 in `test/Tests.hs`. The `test/` directory is solely for testing this library.
 
 ### Test dependencies
+
 All tests are written as [HUnit](http://hackage.haskell.org/package/HUnit) or
 [QuickCheck](http://hackage.haskell.org/package/QuickCheck) tests and are
 implemented using the
@@ -131,6 +148,7 @@ dependencies can be installed with cabal:
     $ cabal install test-framework-hunit
 
 ### Run tests
+
 To run the test suite use:
 
     JTHTML$ cd test/
@@ -141,6 +159,7 @@ Test results are shown on `stdout` and are additionally saved in
 [Jenkins](https://jenkins.io/) or similar.
 
 # Style Guide
+
 All source lines of this library should be at most 70 characters long (which
 can be checked with grep). Moreover,
 [`hlint`](http://community.haskell.org/~ndm/darcs/hlint/hlint.htm) should be
@@ -154,6 +173,7 @@ below.
     JTHTML$ grep -r --include \*.hs -n '.\{70\}' .
 
 # Misc
+
 Developer workflow and release management [as
 described](https://nvie.com/posts/a-successful-git-branching-model/) by Vincent
 Driessen.
@@ -164,4 +184,5 @@ Please get [in touch](http://www.jacktex.eu/about/contact.php) if you would
 like to contribute to this project.
 
 ### Version
+
 v1.0
