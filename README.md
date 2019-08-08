@@ -52,7 +52,7 @@ If your repository contains this library as a submodule run the following:
 
 # Usage Examples
 
-For an implementation example see `test/example[0-9]*.hs`.
+For implementation examples, see `test/example[0-9]*.hs`.
 
 ### `JTPrettyTime.Local`
 

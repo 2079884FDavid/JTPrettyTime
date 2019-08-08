@@ -1,6 +1,8 @@
-Update the README.txt how-to use the test/example.
+Update Utils and Local. Tidy up. Refactor code. Maybe best to move them into one file or at least split them in a more logical way.
+Also run lint and syntax checks.
 
-Think about UnixTimestamp again. In particular anniversaries and leap years.
-Find the documentation of date -> unix timestamp
+Add additional function for Unix to Iso8601.
 
-Update the other Utils and stuff.
+Add unit tests.
+
+Update README.

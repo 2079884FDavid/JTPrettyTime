@@ -1,8 +1,6 @@
 module JTPrettyTime.Util
 ( diffYears
 , isAnniversary
-, Iso8601
-, parseIso8601
 ) where
 
 import Data.Time.Calendar
@@ -11,42 +9,33 @@ import Data.Time.Clock
 import Data.Time.Clock.POSIX
 import Data.Time.LocalTime
 
-type Iso8601 = String
+import JTPrettyTime.Local
+import JTPrettyTime.Convert
 
--- Converts for UTC timezone
--- From https://stackoverflow.com/questions/44905138
-unixToUTCDay :: Integer -> Day
-unixToUTCDay = utctDay . posixSecondsToUTCTime . fromIntegral
+-- Given timestamp is interpreted as UTC, compared with local timezone date
+isAnniversary :: Integer -> IO Bool
+isAnniversary t = do
+  ld <- getCurrentLocalDay
+  return $ isAnniversary' ld $ unixToUTCDay t
 
-unixToSpecificDay :: Integer -> TimeZone -> Day
-unixToSpecificDay t tz = localDay l -- TODO some nicer composition like unixToUTCDay possible
+isAnniversary' :: Day -> Day -> Bool
+isAnniversary' a b = (m1 == m2 && d1 == d2)
   where
-    utc = posixSecondsToUTCTime $ fromIntegral t
-    l = utcToLocalTime tz utc
+    (_, m2, d2) = toGregorian a
+    (_, m1, d1) = toGregorian b
 
-unixToLocalDay :: Integer -> IO Day
-unixToLocalDay t = unixToSpecificDay t <$> getCurrentTimeZone
+getCurrentLocalDay :: IO Day
+getCurrentLocalDay = do
+  c <- getCurrentUnixTime
+  unixToLocalDay c
 
--- The timezone is the offset from UTC in minutes
--- For example: CET=60, PST=-480
-unixToDay :: Integer -> Integer -> Day
-unixToDay t tz = unixToUTCDay t'
-  where
-    t' = t + tz * 60
+diffYears :: Integer -> IO Integer
+diffYears t = do
+  ld <- getCurrentLocalDay
+  return $ diffYears' ld $ unixToUTCDay t
 
-parseIso8601 :: ParseTime t => Iso8601 -> t
-parseIso8601 = parseTimeOrError True defaultTimeLocale spec
-  where
-    spec = "%Y-%-m-%-d"
-
-isAnniversary :: Day -> Day -> Bool
-isAnniversary a b = m1 == m2 && d1 == d2
-  where
-    (_, m1, d1) = toGregorian a
-    (_, m2, d2) = toGregorian b
-
-diffYears :: Day -> Day -> Integer
-diffYears a b = abs (y1 - y2)
+diffYears' :: Day -> Day -> Integer
+diffYears' a b = abs (y1 - y2)
   where
     (y1, _, _) = toGregorian a
     (y2, _, _) = toGregorian b

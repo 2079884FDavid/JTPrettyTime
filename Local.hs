@@ -2,10 +2,12 @@ module JTPrettyTime.Local
 ( getCurTimeString
 , getCurDay
 , getTime
+, getCurrentUnixTime
 ) where
 
 import Data.Time.Calendar
 import Data.Time.Clock
+import Data.Time.Clock.POSIX
 import Data.Time.Format
 import Data.Time.LocalTime
 
@@ -27,3 +29,8 @@ getTime = do
   utc <- getCurrentTime
   zone <- getCurrentTimeZone
   return (utcToLocalTime zone utc)
+
+getCurrentUnixTime :: IO Integer
+getCurrentUnixTime = do
+  t <- getPOSIXTime
+  return $ floor t
