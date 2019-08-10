@@ -24,11 +24,6 @@ isAnniversary' a b = (m1 == m2 && d1 == d2)
     (_, m2, d2) = toGregorian a
     (_, m1, d1) = toGregorian b
 
-getCurrentLocalDay :: IO Day
-getCurrentLocalDay = do
-  c <- getCurrentUnixTime
-  unixToLocalDay c
-
 diffYears :: Integer -> IO Integer
 diffYears t = do
   ld <- getCurrentLocalDay
@@ -39,3 +34,14 @@ diffYears' a b = abs (y1 - y2)
   where
     (y1, _, _) = toGregorian a
     (y2, _, _) = toGregorian b
+
+-- Eg.: "2018-10-23T12:04:03+01:00"
+toSpecificIso8601 :: TimeZone -> Integer -> String
+toSpecificIso8601 tz t = tIso8601 ++ tzIso8601
+  where
+    local = unixToSpecificTime tz t
+    tIso8601 = format "%Y-%m-%dT%H:%M:%S" local
+    tzIso8601 = format "%Ez" tz
+
+format :: FormatTime t => String -> t -> String
+format = formatTime defaultTimeLocale

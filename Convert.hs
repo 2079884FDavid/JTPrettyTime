@@ -1,5 +1,6 @@
 module JTPrettyTime.Convert
 ( unixToUTCTime
+, unixToSpecificTime
 , unixToUTCDay
 , unixToSpecificDay
 , unixToLocalDay
@@ -14,6 +15,9 @@ import Data.Time.LocalTime
 -- From https://stackoverflow.com/questions/44905138
 unixToUTCTime :: Integer -> UTCTime
 unixToUTCTime = posixSecondsToUTCTime . fromIntegral
+
+unixToSpecificTime :: TimeZone -> Integer -> LocalTime
+unixToSpecificTime tz t = utcToLocalTime tz $ unixToUTCTime t
 
 unixToUTCDay :: Integer -> Day
 unixToUTCDay = unixToSpecificDay utc
