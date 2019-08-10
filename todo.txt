@@ -1,8 +1,7 @@
-Update Utils and Local. Tidy up. Refactor code. Maybe best to move them into one file or at least split them in a more logical way.
-Also run lint and syntax checks.
-
-Add additional function for Unix to Iso8601.
+Add some comments to each file briefly describing what they do.
 
 Add unit tests.
 
 Update README.
+
+Release.

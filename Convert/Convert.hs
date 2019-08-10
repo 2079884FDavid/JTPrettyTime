@@ -1,4 +1,4 @@
-module JTPrettyTime.Convert
+module JTPrettyTime.Convert.Convert
 ( unixToUTCTime
 , unixToSpecificTime
 , unixToUTCDay
@@ -7,7 +7,6 @@ module JTPrettyTime.Convert
 ) where
 
 import Data.Time.Calendar
-import Data.Time.Format
 import Data.Time.Clock
 import Data.Time.Clock.POSIX
 import Data.Time.LocalTime
@@ -23,7 +22,7 @@ unixToUTCDay :: Integer -> Day
 unixToUTCDay = unixToSpecificDay utc
 
 unixToSpecificDay :: TimeZone -> Integer -> Day
-unixToSpecificDay tz = localDay . (utcToLocalTime tz) . unixToUTCTime
+unixToSpecificDay tz = localDay . utcToLocalTime tz . unixToUTCTime
 
 unixToLocalDay :: Integer -> IO Day
 unixToLocalDay t = do
