@@ -4,11 +4,12 @@ module JTPrettyTime.Parsec.ParseDate
 ) where
 
 import Data.UnixTime
-import JTPrettyTime.Parsec.ParseUtils
 import Text.Parsec
 import Text.Parsec.String
 import Text.Printf
 import qualified Data.ByteString.Char8 as C
+
+import JTPrettyTime.Parsec.ParseUtils
 
 -- year ::= digit digit digit digit
 -- month ::= digit digit

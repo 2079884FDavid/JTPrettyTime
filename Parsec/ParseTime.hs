@@ -3,9 +3,10 @@ module JTPrettyTime.Parsec.ParseTime
 , parseTime
 ) where
 
-import JTPrettyTime.Parsec.ParseUtils
 import Text.Parsec
 import Text.Parsec.String
+
+import JTPrettyTime.Parsec.ParseUtils
 
 parseCombinedDelimiter :: Parser Int
 parseCombinedDelimiter = (char 'T' <|> char ' ') >> return 0

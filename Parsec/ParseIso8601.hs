@@ -4,11 +4,12 @@ module JTPrettyTime.Parsec.ParseIso8601
 , iso8601Parser
 ) where
 
+import Text.Parsec
+import Text.Parsec.String
+
 import JTPrettyTime.Parsec.ParseDate
 import JTPrettyTime.Parsec.ParseTime
 import JTPrettyTime.Parsec.ParseTimezone
-import Text.Parsec
-import Text.Parsec.String
 
 -- Use this to read the string as far as possible, best effort style.
 -- WARNING: This means that a malformed input might be partially read

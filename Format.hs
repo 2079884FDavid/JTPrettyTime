@@ -1,3 +1,4 @@
+-- Functions to convert Unix-Timestamps to ISO8601 strings
 module JTPrettyTime.Format
 ( unixToLocalIso8601
 , unixToSpecificIso8601

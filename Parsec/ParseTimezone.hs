@@ -2,9 +2,10 @@ module JTPrettyTime.Parsec.ParseTimezone
 ( parseTZ
 ) where
 
-import JTPrettyTime.Parsec.ParseUtils
 import Text.Parsec
 import Text.Parsec.String
+
+import JTPrettyTime.Parsec.ParseUtils
 
 parseTZ :: Parser Int
 parseTZ = (char 'Z' >> return 0) <|> pOffset <|> return 0

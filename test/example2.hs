@@ -1,4 +1,4 @@
-import JTPrettyTime.Local
+import JTPrettyTime.Fetch
 
 -- Compile like this
 -- ghc example2.hs -Wall -Werror --make -i.:../.. \

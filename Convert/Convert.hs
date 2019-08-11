@@ -1,3 +1,5 @@
+-- Contains functions to convert Unix-Timestamps to Haskell Time
+-- library objects.
 module JTPrettyTime.Convert.Convert
 ( unixToUTCTime
 , unixToSpecificTime

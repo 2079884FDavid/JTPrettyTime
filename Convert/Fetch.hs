@@ -1,3 +1,5 @@
+-- Functions to fetch the current time/date for Haskell Time library
+-- objects.
 module JTPrettyTime.Convert.Fetch
 ( getCurrentLocalDay
 , getCurrentLocalTime
