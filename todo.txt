@@ -1,4 +1,4 @@
-Add unit tests.
+Add unit tests (started with Format.hs).
 
 Update README.
 
