@@ -13,4 +13,4 @@ testFunction :: (Show b, Eq b) => String
                                -> Framework.Test
 testFunction desc input expect f = testCase desc t
   where
-    t = expect @?= f input
+    t = expect @=? f input
