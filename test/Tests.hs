@@ -1,5 +1,6 @@
 import Test.Framework as Framework (defaultMain, Test)
 
+import Convert.ConvertTest
 import FormatTest
 import Parsec.ParseDateTest
 import Parsec.ParseIso8601Test
@@ -11,6 +12,7 @@ main = defaultMain tests
 
 tests :: [Framework.Test]
 tests = [
+  groupConvertConvert,
   groupIso8601Parse,
   groupDateParse,
   groupFormat,

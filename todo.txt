@@ -1,4 +1,4 @@
-Add unit tests (started with Format.hs).
+Add unit tests (only Convert/Conver.hs needs completion).
 
 Update README.
 
