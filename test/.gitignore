@@ -3,8 +3,8 @@
 
 # But a few...
 !*.hs
+!*.sh
 !*.txt
 !.gitignore
 !Convert/
 !Parsec/
-!run_tests.sh
