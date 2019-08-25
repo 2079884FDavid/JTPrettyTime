@@ -3,6 +3,7 @@
 module JTPrettyTime.Convert.Convert
 ( unixToUTCTime
 , unixToSpecificTime
+, unixToLocalTime
 , unixToUTCDay
 , unixToSpecificDay
 , unixToLocalDay
@@ -18,7 +19,12 @@ unixToUTCTime :: Integer -> UTCTime
 unixToUTCTime = posixSecondsToUTCTime . fromIntegral
 
 unixToSpecificTime :: TimeZone -> Integer -> LocalTime
-unixToSpecificTime tz t = utcToLocalTime tz $ unixToUTCTime t
+unixToSpecificTime tz = utcToLocalTime tz . unixToUTCTime
+
+unixToLocalTime :: Integer -> IO LocalTime
+unixToLocalTime t = do
+  tz <- getCurrentTimeZone
+  return $ unixToSpecificTime tz t
 
 unixToUTCDay :: Integer -> Day
 unixToUTCDay = unixToSpecificDay utc
