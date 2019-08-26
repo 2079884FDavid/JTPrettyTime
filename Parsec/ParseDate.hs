@@ -21,14 +21,14 @@ import JTPrettyTime.Parsec.ParseUtils
 --        | year month day
 
 -- YYYY-MM-DD or YYYYMMDD
-parseDateTriple :: Parser Int
+parseDateTriple :: Parser Integer
 parseDateTriple = do
   y <- parseDigits 4
   (m, d) <- parseMonthDay
   return $ tripleToTimestamp (y, m, d)
 
 -- -MM-DD or MMDD
-parseMonthDay :: Parser (Int, Int)
+parseMonthDay :: Parser (Integer, Integer)
 parseMonthDay = dash <|> nodash
   where
     dash = do
@@ -43,7 +43,7 @@ parseMonthDay = dash <|> nodash
       return (m, d)
 
 -- YYYY or YYYY-MM
-parseReducedDate :: Parser Int
+parseReducedDate :: Parser Integer
 parseReducedDate = do
   y <- parseDigits 4
   m <- m'
@@ -52,9 +52,9 @@ parseReducedDate = do
     -- The month is optional
     m' = (char '-' >> parseDigits 2) <|> return 1
 
-tripleToTimestamp :: (Int, Int, Int) -> Int
+tripleToTimestamp :: (Integer, Integer, Integer) -> Integer
 tripleToTimestamp (y,m,d) = 
-  fromEnum $ utSeconds $ parseUnixTimeGMT f s
+  toInteger . fromEnum . utSeconds $ parseUnixTimeGMT f s
   where
     f = C.pack "%Y-%m-%d"
     s = C.pack $ printf "%d-%d-%d" y m d

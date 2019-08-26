@@ -8,16 +8,16 @@ import Text.Parsec.String
 
 import JTPrettyTime.Parsec.ParseUtils
 
-parseCombinedDelimiter :: Parser Int
+parseCombinedDelimiter :: Parser Integer
 parseCombinedDelimiter = (char 'T' <|> char ' ') >> return 0
 
-parseTime :: Parser Int
+parseTime :: Parser Integer
 parseTime = do
   h <- parseDigits 2
   m <- parseMinutes -- Returns seconds
   return (h*60*60+m)
 
-parseMinutes :: Parser Int
+parseMinutes :: Parser Integer
 parseMinutes = pBasic <|> pExt <|> return 0
   where
     -- hhmm[ss.sss]
@@ -32,7 +32,7 @@ parseMinutes = pBasic <|> pExt <|> return 0
       s <- ifPresentThen ':' parseSeconds
       return (m*60+s)
 
-parseSeconds :: Parser Int
+parseSeconds :: Parser Integer
 parseSeconds = do
   s <- parseDigits 2
   _ <- ifPresentThen '.' $ parseDigits 3

@@ -14,12 +14,12 @@ import JTPrettyTime.Parsec.ParseTimezone
 -- Use this to read the string as far as possible, best effort style.
 -- WARNING: This means that a malformed input might be partially read
 -- and partially ignored.
-parseIso8601 :: String -> Either String Int
+parseIso8601 :: String -> Either String Integer
 parseIso8601 = sandboxParse iso8601Parser
 
 -- Use this to make sure that ALL input is parsed.
 -- WARNING: Trailing newlines trip this up.
-parseIso8601Strict :: String -> Either String Int
+parseIso8601Strict :: String -> Either String Integer
 parseIso8601Strict = sandboxParse strictParser
   where
     strictParser = do
@@ -28,7 +28,7 @@ parseIso8601Strict = sandboxParse strictParser
       return v
 
 -- You can also use the parser directly
-iso8601Parser :: Parser Int
+iso8601Parser :: Parser Integer
 iso8601Parser = try pFull <|> parseReducedDate
   where
     pFull = chainedParse [
@@ -37,7 +37,7 @@ iso8601Parser = try pFull <|> parseReducedDate
       parseTime,
       parseTZ]
 
-sandboxParse :: Parser Int -> String -> Either String Int
+sandboxParse :: Parser Integer -> String -> Either String Integer
 sandboxParse p input = normalize output
   where
     output = parse p failMsg input
@@ -45,7 +45,7 @@ sandboxParse p input = normalize output
     normalize (Left err) = Left $ show err
     normalize (Right v) = Right v
 
-chainedParse :: [Parser Int] -> Parser Int
+chainedParse :: [Parser Integer] -> Parser Integer
 chainedParse [] = return 0
 chainedParse (x:xs) = do
   v <- x

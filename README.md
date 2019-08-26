@@ -2,6 +2,12 @@
 
 A small Haskell library for simplified date and time handling.
 
+If you just want some time arithmetics in your program and don't want to worry
+about data types, this library is for you. Time is represented as either an
+Integer (unix-timestamp) or a String (ISO8601). However, if you are a strong
+believer in the Haskell philosophy and love types you will probably not like
+this library.
+
 ## Getting started
 
 The following instructions will show you how to incorporate this library into
