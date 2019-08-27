@@ -237,4 +237,4 @@ like to contribute to this project.
 
 ### Version
 
-v1.0
+v2.0
