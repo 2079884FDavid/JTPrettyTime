@@ -60,51 +60,67 @@ If your repository contains this library as a submodule run the following:
 
 For implementation examples, see `test/example[0-9]*.hs`.
 
-### `JTPrettyTime.Local`
+Listed below are only the most relevant functions to help you getting started.
+If you are trying to do more complicated things, there are more functions for
+you available. In that case, please read the source code or use Haskell's time
+library directly.
 
-**`getCurDay`** `:: IO Day`
+### `JTPrettyTime.Convert.*`
 
-Gets the current day taking the local timezone of the machine into account.
+Contains a number of functions to incorporate Haskell's time library.
 
-    *JTPrettyTime.Local> getCurDay
-    2018-10-21
+### `JTPrettyTime.Fetch`
 
-**`getCurTimeString`** `:: IO String`
+**`getCurrentUtcIso8601`** `:: IO String`
 
-Gets the local date, time and timezone and returns it in a human readible
-format.
+Get the current time as an ISO8601 string for UTC.
 
-    *JTPrettyTime.Local> getCurTimeString
-    "2018-10-21 18:58:45 [CEST]"
+    *JTPrettyTime.Fetch> getCurrentUtcIso8601
+    "2019-08-27T19:42:46+00:00"
 
-**`getTime`** `:: IO LocalTime`
+**`getCurrentSpecificIso8601`** `:: TimeZone -> IO String`
 
-Gets the local time of the machine.
+Get the current time as an ISO8601 string for the given timezone.
 
-    *JTPrettyTime.Local> getTime
-    2018-10-21 18:59:11.721698145
+    *JTPrettyTime.Fetch> getCurrentSpecificIso8601 (read "+06:00")
+    "2019-08-28T01:44:24+06:00"
 
-### `JTPrettyTime.Util`
+**`getCurrentLocalIso8601`** `:: IO String`
 
-**`diffYears`** `:: Day -> Day -> Integer`
+Get the current time as an ISO8601 string for the local timezone.
 
-Different in years between two dates. This only looks at the year not at the
-day or month. That means if one day is in December and the second day is a day
-in January of the following year `diffYears` will return 1.
+    *JTPrettyTime.Fetch> getCurrentLocalIso8601
+    "2019-08-27T21:45:41+02:00"
 
-    *JTPrettyTime.Util> let d1 = parseIso8601 "2016-12-25" :: Day
-    *JTPrettyTime.Util> let d2 = parseIso8601 "2017-01-01" :: Day
-    *JTPrettyTime.Util> diffYears d1 d2
-    1
+**`getCurrentUnixTime`** `:: IO Integer`
 
-**`isAnniversary`** `:: Day -> Day -> Bool`
+Get the current unix timestamp.
 
-Checks if the two dates are following on the same month and day of the month.
+    *JTPrettyTime.Fetch> getCurrentUnixTime
+    1566935167
 
-    *JTPrettyTime.Util> let d1 = parseIso8601 "2001-09-11" :: Day
-    *JTPrettyTime.Util> let d2 = parseIso8601 "2013-09-11" :: Day
-    *JTPrettyTime.Util> isAnniversary d1 d2
-    True
+### `JTPrettyTime.Format`
+
+**`unixToUtcIso8601`** `:: Integer -> String`
+
+Turn the given unix timestamp to an ISO8601 string for UTC.
+
+    *JTPrettyTime.Format> unixToUtcIso8601 1234567890
+    "2009-02-13T23:31:30+00:00"
+
+**`unixToSpecificIso8601`** `:: TimeZone -> Integer -> String`
+
+Turn the given unix timestamp to an ISO8601 string for the specified timezone.
+
+    *JTPrettyTime.Format> unixToSpecificIso8601 (read "-09:00") 1234567890
+    "2009-02-13T14:31:30-09:00"
+
+**`unixToLocalIso8601`** `:: Integer -> IO String`
+
+Turn the given unix timestamp to an ISO8601 string for the local timezone.
+
+    *JTPrettyTime.Format> unixToLocalIso8601 1234567890
+    "2009-02-14T01:31:30+02:00"
 
 ### `JTPrettyTime.Parsec.ParseIso8601`
 
@@ -135,6 +151,36 @@ Equivalent to parseIso8601 but the entire string needs to be parsable.
     Right 1564705800
     *JTPrettyTime.Parsec.ParseIso8601> parseIso8601Strict "2019-08-01 18:30 CET"
     Left "\"Failed to parse ISO8601 from string \"2019-08-01 18:30 CET\"\" (line 1, column 17):\nunexpected ' '\nexpecting \":\", \"Z\", \"+\", \"-\" or end of input"
+
+### `JTPrettyTime.Util`
+
+For all functions in `Util.hs`, the given timestamp is interpreted to be in the
+UTC timezone. It is compared to the current timestamp and the local timezone.
+The idea behind this: the given timestamp comes most likely from a string such
+as "2012-05-03" (note the missing timezone).
+
+**`unixDiffYears`** `:: Integer -> IO Integer`
+
+Years since the timestamp. Note that this is simply the distance between the
+years. For example, "2018-12-31" is one year apart from "2019-01-01" (though it
+is only one day apart). Think of it as "last year" and "two years ago".
+
+    *JTPrettyTime.Util> unixDiffYears 1234567890
+    10
+
+**`unixDiffDays`** `:: Integer -> IO Integer`
+
+Days between the given timestamp and the current time.
+
+    *JTPrettyTime.Util> unixDiffDays 1234567890
+    3847
+
+**`isAnniversary`** `:: Integer -> IO Bool`
+
+Is today an anniversary (same month, same day) of the given timestamp.
+
+    *JTPrettyTime.Util> isAnniversary 1234567890
+    False
 
 # Testing
 
