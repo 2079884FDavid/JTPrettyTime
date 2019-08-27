@@ -124,7 +124,7 @@ Turn the given unix timestamp to an ISO8601 string for the local timezone.
 
 ### `JTPrettyTime.Parsec.ParseIso8601`
 
-**`parseIso8601`** `:: String -> Either String Int`
+**`parseIso8601`** `:: String -> Either String Integer`
 
 Parses a string which contains a date and time in the ISO8601 format. The 'T'
 delimiter between date and time is optional. '1970-01-01T00:00+00:00' is the
@@ -143,7 +143,7 @@ Error-Message).
     *JTPrettyTime.Parsec.ParseIso8601> parseIso8601 "2019-08-01 18:30 CET"
     Right 1564684200
 
-**`parseIso8601Strict`** `:: String -> Either String Int`
+**`parseIso8601Strict`** `:: String -> Either String Integer`
 
 Equivalent to parseIso8601 but the entire string needs to be parsable.
 
