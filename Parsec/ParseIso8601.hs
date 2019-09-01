@@ -1,9 +1,12 @@
 module JTPrettyTime.Parsec.ParseIso8601
 ( parseIso8601
-, parseIso8601Strict
+, isIso8601StrictParseable
 , iso8601Parser
+, parseIso8601Forced
+, parseIso8601Strict
 ) where
 
+import Data.Either
 import Text.Parsec
 import Text.Parsec.String
 
@@ -26,6 +29,21 @@ parseIso8601Strict = sandboxParse strictParser
       v <- iso8601Parser
       eof
       return v
+
+-- Use this if you are SURE that the input cannot be malformed.
+-- WARNING: There is no safety net here. If you provide wrong
+-- input, your program will go into an undefined state (returns
+-- unix-timestamp=0) and things will go badly.
+-- DO NOT TRUST USER INPUT!
+parseIso8601Forced :: String -> Integer
+parseIso8601Forced s = case parseIso8601 s of
+  -- fromRight is only available in newer GHC versions
+  (Left _ ) -> 0
+  (Right t) -> t
+
+-- Check if parseIso8601Strict would succeed on input
+isIso8601StrictParseable :: String -> Bool
+isIso8601StrictParseable = isRight . parseIso8601Strict
 
 -- You can also use the parser directly
 iso8601Parser :: Parser Integer

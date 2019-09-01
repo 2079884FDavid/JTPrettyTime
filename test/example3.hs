@@ -6,6 +6,6 @@ import JTPrettyTime.Util
 
 main :: IO ()
 main = do
-  b <- isAnniversary 123456  -- compared to today
+  b <- isLocalAnniversary 123456  -- compared to today
   print b
  

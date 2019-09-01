@@ -6,6 +6,7 @@ import Parsec.ParseDateTest
 import Parsec.ParseIso8601Test
 import Parsec.ParseTimeTest
 import Parsec.ParseTimezoneTest
+import UtilTest
 
 main :: IO ()
 main = defaultMain tests
@@ -13,8 +14,9 @@ main = defaultMain tests
 tests :: [Framework.Test]
 tests = [
   groupConvertConvert,
-  groupIso8601Parse,
   groupDateParse,
   groupFormat,
+  groupIso8601Parse,
   groupTimeParse,
-  groupTimezoneParse]
+  groupTimezoneParse,
+  groupUtil]
