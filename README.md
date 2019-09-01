@@ -65,6 +65,23 @@ If you are trying to do more complicated things, there are more functions for
 you available. In that case, please read the source code or use Haskell's time
 library directly.
 
+---
+*NOTE*
+
+This library uses the `TimeZone` data type from the standard Haskell library,
+because it is the best possible implementation for a timezone. You can create
+`TimeZone` objects on the fly such as:
+
+    read "+02:30"
+
+To get the current local timezone of the machine use:
+
+    import Data.Time.LocalTime
+
+    getCurrentTimeZone :: IO TimeZone
+
+---
+
 ### `JTPrettyTime.Convert.*`
 
 Contains a number of functions to incorporate Haskell's time library.
@@ -152,34 +169,84 @@ Equivalent to parseIso8601 but the entire string needs to be parsable.
     *JTPrettyTime.Parsec.ParseIso8601> parseIso8601Strict "2019-08-01 18:30 CET"
     Left "\"Failed to parse ISO8601 from string \"2019-08-01 18:30 CET\"\" (line 1, column 17):\nunexpected ' '\nexpecting \":\", \"Z\", \"+\", \"-\" or end of input"
 
+**`parseIso8601Forced`** `:: String -> Integer`
+
+Same as parseIso8601 but returns always an Integer. Use this if you are SURE
+that the input cannot be malformed.  *WARNING:* There is no safety net here. If
+you provide wrong input, your program will go into an undefined state (returns
+unix-timestamp=0) and things will go badly. *DO NOT TRUST USER INPUT!*
+
+    *JTPrettyTime.Parsec.ParseIso8601> parseIso8601Forced "2001-09-07"
+    999820800
+
+**`isIso8601StrictParseable`** `:: String -> Bool`
+
+Checks if running parseIso8601Strict on the provided input would work.
+
+    *JTPrettyTime.Parsec.ParseIso8601> isIso8601StrictParseable "2019-09-01"
+    True
+    *JTPrettyTime.Parsec.ParseIso8601> isIso8601StrictParseable "2019-09-01Tango"
+    False
+
 ### `JTPrettyTime.Util`
 
-For all functions in `Util.hs`, the given timestamp is interpreted to be in the
-UTC timezone. It is compared to the current timestamp and the local timezone.
-The idea behind this: the given timestamp comes most likely from a string such
-as "2012-05-03" (note the missing timezone).
+For all functions in `Util.hs`, the given timestamp (last argument) is
+interpreted to be in the UTC timezone. The reference timezone and timestamp
+(first two arguments) are typically the local time of the machine.  The idea
+behind this: the given timestamp comes most likely from a string such as
+"2012-05-03" (note the missing timezone). All of the functions are also
+available as `IO` functions which automatically fetch the current timestamp and
+timezone.
 
-**`unixDiffYears`** `:: Integer -> IO Integer`
+**`unixDiffYears`** `:: TimeZone -> Integer -> Integer -> Integer`
 
-Years since the timestamp. Note that this is simply the distance between the
+Years between the timestamps. Note that this is simply the distance between the
 years. For example, "2018-12-31" is one year apart from "2019-01-01" (though it
 is only one day apart). Think of it as "last year" and "two years ago".
 
-    *JTPrettyTime.Util> unixDiffYears 1234567890
-    10
+    *JTPrettyTime.Util> unixDiffYears (read "+00:00") 987654321 123456789
+    28
+    *JTPrettyTime.Util> unixDiffYears (read "+00:00") 123456789 987654321
+    -28
 
-**`unixDiffDays`** `:: Integer -> IO Integer`
+**`unixDiffLocalYears`** `:: Integer -> IO Integer`
 
-Days between the given timestamp and the current time.
+Same as `unixDiffYears` but automatically use the local timezone and current
+timestamp as the reference date.
 
-    *JTPrettyTime.Util> unixDiffDays 1234567890
-    3847
+    *JTPrettyTime.Util> unixDiffLocalYears 123456789
+    46
 
-**`isAnniversary`** `:: Integer -> IO Bool`
+**`unixDiffDays`** `:: TimeZone -> Integer -> Integer -> Integer`
 
-Is today an anniversary (same month, same day) of the given timestamp.
+Days between the two timestamps.
 
-    *JTPrettyTime.Util> isAnniversary 1234567890
+    *JTPrettyTime.Util> unixDiffDays (read "+00:00") 654321 123456
+    6
+    *JTPrettyTime.Util> unixDiffDays (read "+00:00") 123456 654321
+    -6
+
+**`unixDiffLocalDays`** `:: Integer -> IO Integer`
+
+Same as `unixDiffDays` but automatically use the local timezone and current
+timestamp as the reference date.
+
+    *JTPrettyTime.Util> unixDiffLocalDays 654321
+    18133
+
+**`isAnniversary`** `:: TimeZone -> Integer -> Integer -> Bool`
+
+Are the two dates anniversaries (same month, same day)?
+
+    *JTPrettyTime.Util> isAnniversary (read "-06:00") 1554961500 576633600
+    True
+
+**`isLocalAnniversary`** `:: Integer -> IO Bool`
+
+Same as `isAnniversary` but automatically use the local timezone and current
+timestamp as the reference date.
+
+    *JTPrettyTime.Util> isLocalAnniversary 123456789
     False
 
 # Testing
