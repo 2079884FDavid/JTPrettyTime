@@ -305,4 +305,4 @@ like to contribute to this project.
 
 ### Version
 
-v2.0.1
+v2.1
