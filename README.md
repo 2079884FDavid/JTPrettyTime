@@ -74,11 +74,11 @@ because it is the best possible implementation for a timezone. You can create
 
     read "+02:30"
 
-To get the current local timezone of the machine use:
+To get the current local timezone use:
 
     import Data.Time.LocalTime
 
-    getCurrentTimeZone :: IO TimeZone
+    getCurrentTimeZone :: IO TimeZone  -- CEST
 
 ---
 
@@ -151,7 +151,7 @@ as far as possible. Hence, the string can contain trailing characters. Note
 however, that this can lead to surprising results. In the example below the
 timezone 'CET' is silently ignored (because according to the ISO8601 standard,
 timezones have to be written as absolute values with the exception of 'Z'). If
-you want to ensure that the entire string is parsed, use parseIso8601Strict
+you want to ensure that the entire string is parsed, use `parseIso8601Strict`
 instead. Returns (Right Unix-Timestamp) or, if there was a parsing error, (Left
 Error-Message).
 
@@ -171,17 +171,18 @@ Equivalent to parseIso8601 but the entire string needs to be parsable.
 
 **`parseIso8601Forced`** `:: String -> Integer`
 
-Same as parseIso8601 but returns always an Integer. Use this if you are SURE
-that the input cannot be malformed.  *WARNING:* There is no safety net here. If
-you provide wrong input, your program will go into an undefined state (returns
-unix-timestamp=0) and things will go badly. *DO NOT TRUST USER INPUT!*
+Same as `parseIso8601` but always returns an Integer. Use this if you are sure
+that the input cannot be malformed.  **WARNING:** There is no safety net here.
+If you provide wrong input, your program will go into an undefined state
+(returns unix-timestamp=0) and things will go badly. **DO NOT TRUST USER
+INPUT!**
 
     *JTPrettyTime.Parsec.ParseIso8601> parseIso8601Forced "2001-09-07"
     999820800
 
 **`isIso8601StrictParseable`** `:: String -> Bool`
 
-Checks if running parseIso8601Strict on the provided input would work.
+Checks if running `parseIso8601Strict` on the provided input would work.
 
     *JTPrettyTime.Parsec.ParseIso8601> isIso8601StrictParseable "2019-09-01"
     True
