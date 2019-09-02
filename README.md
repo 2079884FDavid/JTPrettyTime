@@ -16,6 +16,7 @@ of submodules check out this [link](https://gist.github.com/gitaarik/8735255).
 
 ### Prerequisites/Dependencies
 
+    cabal install parsec
     cabal install time
     cabal install unix-time
 
