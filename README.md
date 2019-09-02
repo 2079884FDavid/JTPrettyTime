@@ -306,4 +306,4 @@ like to contribute to this project.
 
 ### Version
 
-v2.1
+v2.1.1
